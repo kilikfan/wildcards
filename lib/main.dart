@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'screens/draft_mode/draft_mode_page.dart';
+import 'screens/main_menu/menu_button.dart';
+import 'screens/open_packs_mode/free_packs_page.dart';
+
 void main() {
   runApp(const MainPage());
 }
@@ -30,14 +34,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,24 +42,23 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have this many cards in your collection:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.75,
+          width: MediaQuery.of(context).size.width * 0.75,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                MenuButton('Open Packs', onPressed: () {
+                  FreePacksPage();
+                }),
+                MenuButton('Draft Mode', onPressed: () {
+                  DraftModePage();
+                }),
+              ]),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
 }
+
+// TODO - mini menu with settings and credits, hamburger or something
